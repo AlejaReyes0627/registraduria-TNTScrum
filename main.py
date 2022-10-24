@@ -14,7 +14,7 @@ from Controladores.ControladorResultado import ControladorResultado
 miControladorEstudiante=ControladorEstudiante()
 miControladorDepartamento=ControladorDepartamento()
 miControladorMateria=ControladorMateria()
-miControladorInscripcion=  ControladorInscripcion()
+miControladorResultado=  ControladorResultado()
 
 ###################################################################################
 @app.route("/",methods=['GET'])
@@ -100,24 +100,24 @@ def asignarDepartamentoAMateria(id,id_departamento):
 def getResultados():
     json=miControladorResultado.index()
     return jsonify(json)
-@app.route("/inscripciones/<string:id>",methods=['GET'])
-def getInscripcion(id):
-    json=miControladorInscripcion.show(id)
+@app.route("/resultados/<string:id>",methods=['GET'])
+def getResultado(id):
+    json=miControladorResultado.show(id)
     return jsonify(json)
-@app.route("/inscripciones/estudiante/<string:id_estudiante>/materia/<string:id_materia>",methods=['POST'])
-def crearInscripcion(id_estudiante,id_materia):
+@app.route("/resultados/candidatos/<string:cedula_candidato>/mesas/<string:numero_mesa>",methods=['POST'])
+def crearResultado(cedula_candidato,numero_mesa):
     data = request.get_json()
-    json=miControladorInscripcion.create(data,id_estudiante,id_materia)
+    json=miControladorResultado.create(data,cedula_candidato,numero_mesa)
     return jsonify(json)
-@app.route("/inscripciones/<string:id_inscripcion>/estudiante/<string:id_estudiante>/materia/<string:id_materia>",methods=['PUT'])
+'''@app.route("/Resultados/<string:id>/estudiante/<string:id_estudiante>/materia/<string:id_materia>",methods=['PUT'])
 def modificarInscripcion(id_inscripcion,id_estudiante,id_materia):
     data = request.get_json()
-    json=miControladorInscripcion.update(id_inscripcion,data,id_estudiante,id_materia)
+    json=miControladorResultado.update(id,data,numero_mesa,cedula_candidato,numero_votos)
     return jsonify(json)
 @app.route("/inscripciones/<string:id_inscripcion>",methods=['DELETE'])
 def eliminarInscripcion(id_inscripcion):
     json=miControladorInscripcion.delete(id_inscripcion)
-    return jsonify(json)
+    return jsonify(json)'''
 ###################################################################################
 def loadFileConfig():
     with open('config.json') as f:
