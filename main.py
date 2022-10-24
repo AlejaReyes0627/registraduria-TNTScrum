@@ -22,17 +22,17 @@ def test():
     json = {}
     json["message"]="Server running ..."
     return jsonify(json)
-###################################################################################
-@app.route("/estudiantes",methods=['GET'])
+########################mesas###########################################################
+@app.route("/mesas",methods=['GET'])
 def getEstudiantes():
     json=miControladorEstudiante.index()
     return jsonify(json)
-@app.route("/estudiantes",methods=['POST'])
+@app.route("/mesas",methods=['POST'])
 def crearEstudiante():
     data = request.get_json()
     json=miControladorEstudiante.create(data)
     return jsonify(json)
-@app.route("/estudiantes/<string:id>",methods=['GET'])
+@app.route("/mesas/<string:id>",methods=['GET'])
 def getEstudiante(id):
     json=miControladorEstudiante.show(id)
     return jsonify(json)
@@ -45,7 +45,7 @@ def modificarEstudiante(id):
 def eliminarEstudiante(id):
     json=miControladorEstudiante.delete(id)
     return jsonify(json)
-###################################################################################
+############################partidos#######################################################
 @app.route("/departamentos",methods=['GET'])
 def getDepartamentos():
     json=miControladorDepartamento.index()
@@ -68,7 +68,7 @@ def modificarDepartamento(id):
 def eliminarDepartamento(id):
     json=miControladorDepartamento.delete(id)
     return jsonify(json)
-###################################################################################
+################################candidatos###################################################
 @app.route("/materias",methods=['GET'])
 def getMaterias():
     json=miControladorMateria.index()
@@ -95,7 +95,7 @@ def eliminarMateria(id):
 def asignarDepartamentoAMateria(id,id_departamento):
     json=miControladorMateria.asignarDepartamento(id,id_departamento)
     return jsonify(json)
-###################################################################################
+##################################resultados#################################################
 @app.route("/inscripciones",methods=['GET'])
 def getInscripciones():
     json=miControladorInscripcion.index()
