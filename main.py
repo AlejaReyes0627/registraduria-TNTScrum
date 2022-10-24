@@ -11,11 +11,17 @@ from Controladores.ControladorEstudiante import ControladorEstudiante
 from Controladores.ControladorDepartamento import ControladorDepartamento
 from Controladores.ControladorMateria import ControladorMateria
 from Controladores.ControladorInscripcion import ControladorInscripcion
+"""
+Importación del controlador de los candidatos
+"""
 from Controladores.ControladorCandidatos import ControladorCandidatos
 miControladorEstudiante=ControladorEstudiante()
 miControladorDepartamento=ControladorDepartamento()
 miControladorMateria=ControladorMateria()
 miControladorInscripcion=  ControladorInscripcion()
+"""
+Declaración del atributo miControlCandidato de la clase ControladorCandidatos
+"""
 miControladorCandidato = ControladorCandidatos()
 
 ###################################################################################
@@ -71,37 +77,55 @@ def eliminarDepartamento(id):
     json=miControladorDepartamento.delete(id)
     return jsonify(json)
 ################################candidatos###################################################
+"""
+Método que lanza una lista de los candidatos insertados
+"""
 @app.route("/candidatos",methods=['GET'])
 def getMaterias():
     json=miControladorCandidato.index()
     print("Get conseguido")
     return jsonify(json)
+
+"""
+Método que lanza una lista de los candidatos insertados filtrados por ID
+@params id: identificador por defecto proporcionado por MongoDB
+"""
 @app.route("/candidatos/<string:id>",methods=['GET'])
 def getMateria(id):
     json=miControladorCandidato.show(id)
     print("Get by id conseguido")
     return jsonify(json)
+
+"""
+Método que permite insertar un candidato
+"""
 @app.route("/candidatos",methods=['POST'])
 def crearMateria():
     data = request.get_json()
     json=miControladorCandidato.create(data)
     print("Post conseguido")
     return jsonify(json)
+
+"""
+Método que permite hacer una actualización del candidato seleccionado por id
+@params id: identificador del candidato por defecto proporcionado por MongoDB
+"""
 @app.route("/candidatos/<string:id>",methods=['PUT'])
 def modificarMateria(id):
     data = request.get_json()
     json=miControladorCandidato.update(id,data)
     print("Put conseguido")
     return jsonify(json)
+
+"""
+Método que elimina a un candidato mediante su id
+@params id: identificador del candidato por defecto proporcionado por MongoDB
+"""
 @app.route("/candidatos/<string:id>",methods=['DELETE'])
 def eliminarMateria(id):
     json=miControladorCandidato.delete(id)
     print("Delete conseguido")
     return jsonify(json)
-#@app.route("/materias/<string:id>/departamento/<string:id_departamento>",methods=['PUT'])
-#def asignarDepartamentoAMateria(id,id_departamento):
-#    json=miControladorMateria.asignarDepartamento(id,id_departamento)
-#    return jsonify(json)
 ##################################resultados#################################################
 @app.route("/inscripciones",methods=['GET'])
 def getInscripciones():
