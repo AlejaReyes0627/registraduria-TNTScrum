@@ -10,7 +10,7 @@ cors = CORS(app)
 from Controladores.ControladorEstudiante import ControladorEstudiante
 from Controladores.ControladorDepartamento import ControladorDepartamento
 from Controladores.ControladorMateria import ControladorMateria
-from Controladores.ControladorInscripcion import ControladorInscripcion
+from Controladores.ControladorResultado import ControladorResultado
 miControladorEstudiante=ControladorEstudiante()
 miControladorDepartamento=ControladorDepartamento()
 miControladorMateria=ControladorMateria()
@@ -96,9 +96,9 @@ def asignarDepartamentoAMateria(id,id_departamento):
     json=miControladorMateria.asignarDepartamento(id,id_departamento)
     return jsonify(json)
 ##################################resultados#################################################
-@app.route("/inscripciones",methods=['GET'])
-def getInscripciones():
-    json=miControladorInscripcion.index()
+@app.route("/resultados",methods=['GET'])
+def getResultados():
+    json=miControladorResultado.index()
     return jsonify(json)
 @app.route("/inscripciones/<string:id>",methods=['GET'])
 def getInscripcion(id):
