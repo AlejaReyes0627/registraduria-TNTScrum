@@ -11,10 +11,12 @@ from Controladores.ControladorEstudiante import ControladorEstudiante
 from Controladores.ControladorDepartamento import ControladorDepartamento
 from Controladores.ControladorMateria import ControladorMateria
 from Controladores.ControladorInscripcion import ControladorInscripcion
+from Controladores.ControladorCandidatos import ControladorCandidatos
 miControladorEstudiante=ControladorEstudiante()
 miControladorDepartamento=ControladorDepartamento()
 miControladorMateria=ControladorMateria()
 miControladorInscripcion=  ControladorInscripcion()
+miControladorCandidato = ControladorCandidatos()
 
 ###################################################################################
 @app.route("/",methods=['GET'])
@@ -69,32 +71,37 @@ def eliminarDepartamento(id):
     json=miControladorDepartamento.delete(id)
     return jsonify(json)
 ################################candidatos###################################################
-@app.route("/materias",methods=['GET'])
+@app.route("/candidatos",methods=['GET'])
 def getMaterias():
-    json=miControladorMateria.index()
+    json=miControladorCandidato.index()
+    print("Get conseguido")
     return jsonify(json)
-@app.route("/materias/<string:id>",methods=['GET'])
+@app.route("/candidatos/<string:id>",methods=['GET'])
 def getMateria(id):
-    json=miControladorMateria.show(id)
+    json=miControladorCandidato.show(id)
+    print("Get by id conseguido")
     return jsonify(json)
-@app.route("/materias",methods=['POST'])
+@app.route("/candidatos",methods=['POST'])
 def crearMateria():
     data = request.get_json()
-    json=miControladorMateria.create(data)
+    json=miControladorCandidato.create(data)
+    print("Post conseguido")
     return jsonify(json)
-@app.route("/materias/<string:id>",methods=['PUT'])
+@app.route("/candidatos/<string:id>",methods=['PUT'])
 def modificarMateria(id):
     data = request.get_json()
-    json=miControladorMateria.update(id,data)
+    json=miControladorCandidato.update(id,data)
+    print("Put conseguido")
     return jsonify(json)
-@app.route("/materias/<string:id>",methods=['DELETE'])
+@app.route("/candidatos/<string:id>",methods=['DELETE'])
 def eliminarMateria(id):
-    json=miControladorMateria.delete(id)
+    json=miControladorCandidato.delete(id)
+    print("Delete conseguido")
     return jsonify(json)
-@app.route("/materias/<string:id>/departamento/<string:id_departamento>",methods=['PUT'])
-def asignarDepartamentoAMateria(id,id_departamento):
-    json=miControladorMateria.asignarDepartamento(id,id_departamento)
-    return jsonify(json)
+#@app.route("/materias/<string:id>/departamento/<string:id_departamento>",methods=['PUT'])
+#def asignarDepartamentoAMateria(id,id_departamento):
+#    json=miControladorMateria.asignarDepartamento(id,id_departamento)
+#    return jsonify(json)
 ##################################resultados#################################################
 @app.route("/inscripciones",methods=['GET'])
 def getInscripciones():
