@@ -31,25 +31,25 @@ def test():
 ########################mesas###########################################################
 @app.route("/mesas",methods=['GET'])
 def getEstudiantes():
-    json=miControladorEstudiante.index()
+    json=miControladorMesas.index()
     return jsonify(json)
 @app.route("/mesas",methods=['POST'])
 def crearEstudiante():
     data = request.get_json()
-    json=miControladorEstudiante.create(data)
+    json=miControladorMesas.create(data)
     return jsonify(json)
 @app.route("/mesas/<string:id>",methods=['GET'])
 def getEstudiante(id):
-    json=miControladorEstudiante.show(id)
+    json=miControladorMesas.show(id)
     return jsonify(json)
-@app.route("/estudiantes/<string:id>",methods=['PUT'])
+@app.route("/mesas/<string:id>",methods=['PUT'])
 def modificarEstudiante(id):
     data = request.get_json()
-    json=miControladorEstudiante.update(id,data)
+    json=miControladorMesas.update(id,data)
     return jsonify(json)
-@app.route("/estudiantes/<string:id>",methods=['DELETE'])
+@app.route("/mesas/<string:id>",methods=['DELETE'])
 def eliminarEstudiante(id):
-    json=miControladorEstudiante.delete(id)
+    json=miControladorMesas.delete(id)
     return jsonify(json)
 ############################partidos#######################################################
 @app.route("/partidos",methods=['GET'])
