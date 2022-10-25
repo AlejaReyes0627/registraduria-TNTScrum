@@ -59,6 +59,7 @@ def eliminarEstudiante(id):
 @app.route("/partidos",methods=['GET'])
 def getPartidos():
     json=miControladorPartidos.index()
+    print("get partido conseguido")
     return jsonify(json)
 @app.route("/partidos/<string:id>",methods=['GET'])
 def getPartidosid(id):
@@ -127,6 +128,16 @@ Método que elimina a un candidato mediante su id
 def eliminarMateria(id):
     json=miControladorCandidato.delete(id)
     print("Delete conseguido")
+    return jsonify(json)
+"""
+Método que relaciona a un candidato mediante su id con un partido
+@params id: identificador del candidato por defecto proporcionado por MongoDB
+@param id_partidos: id de los partidos impuestos por defectos en mongo
+"""
+@app.route("/candidatos/<string:id>/partidos/<string:id_partidos>",methods=['PUT'])
+def asignarCandidatoAPartidos(id,id_partidos):
+    json=miControladorCandidato.asignarPartido(id,id_partidos)
+    print(json)
     return jsonify(json)
 ##################################resultados#################################################
 @app.route("/inscripciones",methods=['GET'])
