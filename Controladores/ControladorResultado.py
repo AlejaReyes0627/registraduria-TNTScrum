@@ -4,21 +4,23 @@ from Modelos.Materia import Materia
 from Repositorios.RepositorioResultado import RepositorioResultado
 from Repositorios.RepositorioEstudiante import RepositorioEstudiante
 from Repositorios.RepositorioMateria import RepositorioMateria
-class ControladorInscripcion():
+class ControladorResultado():
     def __init__(self):
         self.repositorioResultado = RepositorioResultado()
         self.repositorioEstudiantes = RepositorioEstudiante()
         self.repositorioMaterias = RepositorioMateria()
     def index(self):
         return self.repositorioResultado.findAll()
-
-    def create(self,infoResultado,id,numero_mesa,cedula_candidato,numero_votos):
+    '''Asignación de mesa y candidato a Resultado'''
+    def create(self,infoResultado,numero_mesa,cedula_candidato):
         nuevoResultado=Resultado(infoResultado)
-        elResultado=Resultado(self.repositorioResultado.findById(id))
+        infoResultado=Resultado(self.repositorioResultado.findById(id))
         laMesa=Mesa(self.repositorioMesa.findById(numero_mesa))
         elCandidato=Candidato(self.repositorioCandidato.findById(cedula_candidato))
         nuevoResultado.mesa=laMesa
         nuevoResultado.candidato=elCandidato
+        elResultado=Resultado(self.repositorioResultado.findById(id))
+        elResultado.numero_votos=infoResultado["numero_votos"]
         return self.repositorioResultado.save(nuevoResultado)
     def show(self,id):
         elResultado=Resultado(self.repositorioResultado.findById(id))
