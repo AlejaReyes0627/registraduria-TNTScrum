@@ -14,13 +14,10 @@ class ControladorResultado():
     '''Asignación de mesa y candidato a Resultado'''
     def create(self,infoResultado,numero_mesa,cedula_candidato):
         nuevoResultado=Resultado(infoResultado)
-        infoResultado=Resultado(self.repositorioResultado.findById(id))
-        laMesa=Mesas(self.repositorioMesa.findById(numero_mesa))
-        elCandidato=Candidatos(self.repositorioCandidato.findById(cedula_candidato))
+        laMesa=Mesas(self.repositorioMesas.findById(numero_mesa))
+        elCandidato=Candidatos(self.repositorioCandidatos.findById(cedula_candidato))
         nuevoResultado.mesa=laMesa
         nuevoResultado.candidato=elCandidato
-        elResultado=Resultado(self.repositorioResultado.findById(id))
-        elResultado.numero_votos=infoResultado["numero_votos"]
         return self.repositorioResultado.save(nuevoResultado)
     def show(self,id):
         elResultado=Resultado(self.repositorioResultado.findById(id))
