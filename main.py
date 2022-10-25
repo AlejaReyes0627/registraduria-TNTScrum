@@ -11,26 +11,20 @@ from Controladores.ControladorEstudiante import ControladorEstudiante
 from Controladores.ControladorDepartamento import ControladorDepartamento
 from Controladores.ControladorMateria import ControladorMateria
 from Controladores.ControladorInscripcion import ControladorInscripcion
-<<<<<<< HEAD
 """
 Importación del controlador de los candidatos
 """
 from Controladores.ControladorCandidatos import ControladorCandidatos
-=======
 from Controladores.ControladorPartidos import ControladorPartidos
->>>>>>> origin/partidos
 miControladorEstudiante=ControladorEstudiante()
 miControladorDepartamento=ControladorDepartamento()
 miControladorMateria=ControladorMateria()
 miControladorInscripcion=  ControladorInscripcion()
-<<<<<<< HEAD
 """
 Declaración del atributo miControlCandidato de la clase ControladorCandidatos
 """
 miControladorCandidato = ControladorCandidatos()
-=======
 miControladorPartidos= ControladorPartidos()
->>>>>>> origin/partidos
 
 ###################################################################################
 @app.route("/",methods=['GET'])
