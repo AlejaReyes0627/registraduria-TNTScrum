@@ -11,18 +11,26 @@ from Controladores.ControladorEstudiante import ControladorEstudiante
 from Controladores.ControladorDepartamento import ControladorDepartamento
 from Controladores.ControladorMateria import ControladorMateria
 from Controladores.ControladorInscripcion import ControladorInscripcion
+<<<<<<< HEAD
 """
 Importación del controlador de los candidatos
 """
 from Controladores.ControladorCandidatos import ControladorCandidatos
+=======
+from Controladores.ControladorPartidos import ControladorPartidos
+>>>>>>> origin/partidos
 miControladorEstudiante=ControladorEstudiante()
 miControladorDepartamento=ControladorDepartamento()
 miControladorMateria=ControladorMateria()
 miControladorInscripcion=  ControladorInscripcion()
+<<<<<<< HEAD
 """
 Declaración del atributo miControlCandidato de la clase ControladorCandidatos
 """
 miControladorCandidato = ControladorCandidatos()
+=======
+miControladorPartidos= ControladorPartidos()
+>>>>>>> origin/partidos
 
 ###################################################################################
 @app.route("/",methods=['GET'])
@@ -54,27 +62,27 @@ def eliminarEstudiante(id):
     json=miControladorEstudiante.delete(id)
     return jsonify(json)
 ############################partidos#######################################################
-@app.route("/departamentos",methods=['GET'])
-def getDepartamentos():
-    json=miControladorDepartamento.index()
+@app.route("/partidos",methods=['GET'])
+def getPartidos():
+    json=miControladorPartidos.index()
     return jsonify(json)
-@app.route("/departamentos/<string:id>",methods=['GET'])
-def getDepartamento(id):
-    json=miControladorDepartamento.show(id)
+@app.route("/partidos/<string:id>",methods=['GET'])
+def getPartidosid(id):
+    json=miControladorPartidos.show(id)
     return jsonify(json)
-@app.route("/departamentos",methods=['POST'])
-def crearDepartamento():
+@app.route("/partidos",methods=['POST'])
+def crearPartidos():
     data = request.get_json()
-    json=miControladorDepartamento.create(data)
+    json=miControladorPartidos.create(data)
     return jsonify(json)
-@app.route("/departamentos/<string:id>",methods=['PUT'])
-def modificarDepartamento(id):
+@app.route("/partidos/<string:id>",methods=['PUT'])
+def modificarPartidos(id):
     data = request.get_json()
-    json=miControladorDepartamento.update(id,data)
+    json=miControladorPartidos.update(id,data)
     return jsonify(json)
-@app.route("/departamentos/<string:id>",methods=['DELETE'])
-def eliminarDepartamento(id):
-    json=miControladorDepartamento.delete(id)
+@app.route("/partidos/<string:id>",methods=['DELETE'])
+def eliminarPartidos(id):
+    json=miControladorPartidos.delete(id)
     return jsonify(json)
 ################################candidatos###################################################
 """
