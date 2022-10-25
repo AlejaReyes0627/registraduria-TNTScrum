@@ -147,7 +147,7 @@ def getResultado(id):
 @app.route("/resultados/candidatos/<string:cedula_candidato>/mesas/<string:numero_mesa>",methods=['POST'])
 def crearResultado(numero_mesa,cedula_candidato):
     data = request.get_json()
-    json=miControladorResultado.create(id,data,numero_mesa,cedula_candidato, numero_votos)
+    json=miControladorResultado.create(id,data,numero_mesa,cedula_candidato)
     return jsonify(json)
 '''@app.route("/Resultados/<string:id>/estudiante/<string:id_estudiante>/materia/<string:id_materia>",methods=['PUT'])
 def modificarInscripcion(id_inscripcion,id_estudiante,id_materia):
