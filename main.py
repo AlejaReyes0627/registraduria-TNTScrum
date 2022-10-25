@@ -11,6 +11,11 @@ from Controladores.ControladorEstudiante import ControladorEstudiante
 from Controladores.ControladorDepartamento import ControladorDepartamento
 from Controladores.ControladorMateria import ControladorMateria
 from Controladores.ControladorResultado import ControladorResultado
+"""
+Importación del controlador de los candidatos
+"""
+from Controladores.ControladorCandidatos import ControladorCandidatos
+from Controladores.ControladorPartidos import ControladorPartidos
 miControladorEstudiante=ControladorEstudiante()
 miControladorDepartamento=ControladorDepartamento()
 miControladorMateria=ControladorMateria()
@@ -46,54 +51,88 @@ def eliminarEstudiante(id):
     json=miControladorEstudiante.delete(id)
     return jsonify(json)
 ############################partidos#######################################################
-@app.route("/departamentos",methods=['GET'])
-def getDepartamentos():
-    json=miControladorDepartamento.index()
+@app.route("/partidos",methods=['GET'])
+def getPartidos():
+    json=miControladorPartidos.index()
+    print("get partido conseguido")
     return jsonify(json)
-@app.route("/departamentos/<string:id>",methods=['GET'])
-def getDepartamento(id):
-    json=miControladorDepartamento.show(id)
+@app.route("/partidos/<string:id>",methods=['GET'])
+def getPartidosid(id):
+    json=miControladorPartidos.show(id)
     return jsonify(json)
-@app.route("/departamentos",methods=['POST'])
-def crearDepartamento():
+@app.route("/partidos",methods=['POST'])
+def crearPartidos():
     data = request.get_json()
-    json=miControladorDepartamento.create(data)
+    json=miControladorPartidos.create(data)
     return jsonify(json)
-@app.route("/departamentos/<string:id>",methods=['PUT'])
-def modificarDepartamento(id):
+@app.route("/partidos/<string:id>",methods=['PUT'])
+def modificarPartidos(id):
     data = request.get_json()
-    json=miControladorDepartamento.update(id,data)
+    json=miControladorPartidos.update(id,data)
     return jsonify(json)
-@app.route("/departamentos/<string:id>",methods=['DELETE'])
-def eliminarDepartamento(id):
-    json=miControladorDepartamento.delete(id)
+@app.route("/partidos/<string:id>",methods=['DELETE'])
+def eliminarPartidos(id):
+    json=miControladorPartidos.delete(id)
     return jsonify(json)
 ################################candidatos###################################################
-@app.route("/materias",methods=['GET'])
+"""
+Método que lanza una lista de los candidatos insertados
+"""
+@app.route("/candidatos",methods=['GET'])
 def getMaterias():
-    json=miControladorMateria.index()
+    json=miControladorCandidato.index()
+    print("Get conseguido")
     return jsonify(json)
-@app.route("/materias/<string:id>",methods=['GET'])
+
+"""
+Método que lanza una lista de los candidatos insertados filtrados por ID
+@params id: identificador por defecto proporcionado por MongoDB
+"""
+@app.route("/candidatos/<string:id>",methods=['GET'])
 def getMateria(id):
-    json=miControladorMateria.show(id)
+    json=miControladorCandidato.show(id)
+    print("Get by id conseguido")
     return jsonify(json)
-@app.route("/materias",methods=['POST'])
+
+"""
+Método que permite insertar un candidato
+"""
+@app.route("/candidatos",methods=['POST'])
 def crearMateria():
     data = request.get_json()
-    json=miControladorMateria.create(data)
+    json=miControladorCandidato.create(data)
+    print("Post conseguido")
     return jsonify(json)
-@app.route("/materias/<string:id>",methods=['PUT'])
+
+"""
+Método que permite hacer una actualización del candidato seleccionado por id
+@params id: identificador del candidato por defecto proporcionado por MongoDB
+"""
+@app.route("/candidatos/<string:id>",methods=['PUT'])
 def modificarMateria(id):
     data = request.get_json()
-    json=miControladorMateria.update(id,data)
+    json=miControladorCandidato.update(id,data)
+    print("Put conseguido")
     return jsonify(json)
-@app.route("/materias/<string:id>",methods=['DELETE'])
+
+"""
+Método que elimina a un candidato mediante su id
+@params id: identificador del candidato por defecto proporcionado por MongoDB
+"""
+@app.route("/candidatos/<string:id>",methods=['DELETE'])
 def eliminarMateria(id):
-    json=miControladorMateria.delete(id)
+    json=miControladorCandidato.delete(id)
+    print("Delete conseguido")
     return jsonify(json)
-@app.route("/materias/<string:id>/departamento/<string:id_departamento>",methods=['PUT'])
-def asignarDepartamentoAMateria(id,id_departamento):
-    json=miControladorMateria.asignarDepartamento(id,id_departamento)
+"""
+Método que relaciona a un candidato mediante su id con un partido
+@params id: identificador del candidato por defecto proporcionado por MongoDB
+@param id_partidos: id de los partidos impuestos por defectos en mongo
+"""
+@app.route("/candidatos/<string:id>/partidos/<string:id_partidos>",methods=['PUT'])
+def asignarCandidatoAPartidos(id,id_partidos):
+    json=miControladorCandidato.asignarPartido(id,id_partidos)
+    print(json)
     return jsonify(json)
 ##################################resultados#################################################
 @app.route("/resultados",methods=['GET'])
@@ -102,21 +141,21 @@ def getResultados():
     return jsonify(json)
 @app.route("/inscripciones/<string:id>",methods=['GET'])
 def getInscripcion(id):
-    json=miControladorInscripcion.show(id)
+    json=miControladorResultado.show(id)
     return jsonify(json)
 @app.route("/inscripciones/estudiante/<string:id_estudiante>/materia/<string:id_materia>",methods=['POST'])
 def crearInscripcion(id_estudiante,id_materia):
     data = request.get_json()
-    json=miControladorInscripcion.create(data,id_estudiante,id_materia)
+    json=miControladorResultado.create(data,id_estudiante,id_materia)
     return jsonify(json)
 @app.route("/inscripciones/<string:id_inscripcion>/estudiante/<string:id_estudiante>/materia/<string:id_materia>",methods=['PUT'])
 def modificarInscripcion(id_inscripcion,id_estudiante,id_materia):
     data = request.get_json()
-    json=miControladorInscripcion.update(id_inscripcion,data,id_estudiante,id_materia)
+    json=miControladorResultado.update(id_inscripcion,data,id_estudiante,id_materia)
     return jsonify(json)
 @app.route("/inscripciones/<string:id_inscripcion>",methods=['DELETE'])
 def eliminarInscripcion(id_inscripcion):
-    json=miControladorInscripcion.delete(id_inscripcion)
+    json=miControladorResultado.delete(id_inscripcion)
     return jsonify(json)
 ###################################################################################
 def loadFileConfig():
