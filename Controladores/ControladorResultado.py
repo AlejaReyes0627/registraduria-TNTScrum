@@ -1,22 +1,22 @@
 from Modelos.Resultado import Resultado
-from Modelos.Estudiante import Estudiante
-from Modelos.Materia import Materia
+from Modelos.Mesas import Mesas
+from Modelos.Candidatos import Candidatos
 from Repositorios.RepositorioResultado import RepositorioResultado
-from Repositorios.RepositorioEstudiante import RepositorioEstudiante
-from Repositorios.RepositorioMateria import RepositorioMateria
+from Repositorios.RepositorioMesas import RepositorioMesas
+from Repositorios.RepositorioCandidatos import RepositorioCandidatos
 class ControladorResultado():
     def __init__(self):
         self.repositorioResultado = RepositorioResultado()
-        self.repositorioEstudiantes = RepositorioEstudiante()
-        self.repositorioMaterias = RepositorioMateria()
+        self.repositorioMesas = RepositorioMesas()
+        self.repositorioCandidatos = RepositorioCandidatos()
     def index(self):
         return self.repositorioResultado.findAll()
     '''Asignación de mesa y candidato a Resultado'''
     def create(self,infoResultado,numero_mesa,cedula_candidato):
         nuevoResultado=Resultado(infoResultado)
         infoResultado=Resultado(self.repositorioResultado.findById(id))
-        laMesa=Mesa(self.repositorioMesa.findById(numero_mesa))
-        elCandidato=Candidato(self.repositorioCandidato.findById(cedula_candidato))
+        laMesa=Mesas(self.repositorioMesa.findById(numero_mesa))
+        elCandidato=Candidatos(self.repositorioCandidato.findById(cedula_candidato))
         nuevoResultado.mesa=laMesa
         nuevoResultado.candidato=elCandidato
         elResultado=Resultado(self.repositorioResultado.findById(id))
@@ -31,9 +31,9 @@ class ControladorResultado():
         elResultado.año=infoInscripcion["año"]
         elResultado.semestre = infoInscripcion["semestre"]
         elResultado.notaFinal=infoInscripcion["nota_final"]
-        elResultado = Estudiante(self.repositorioEstudiantes.findById(id_estudiante))
+        elResultado = Mesas(self.repositorioMesass.findById(id_Mesas))
         laMateria = Materia(self.repositorioMaterias.findById(id_materia))
-        laInscripcion.estudiante = elEstudiante
+        laInscripcion.Mesas = elMesas
         laInscripcion.materia = laMateria
         return self.repositorioInscripcion.save(laInscripcion)
     def delete(self, id):

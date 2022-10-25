@@ -7,18 +7,14 @@ from waitress import serve
 
 app=Flask(__name__)
 cors = CORS(app)
-from Controladores.ControladorEstudiante import ControladorEstudiante
-from Controladores.ControladorDepartamento import ControladorDepartamento
-from Controladores.ControladorMateria import ControladorMateria
+from Controladores.ControladorMesas import ControladorMesas
 from Controladores.ControladorResultado import ControladorResultado
 """
 Importación del controlador de los candidatos
 """
 from Controladores.ControladorCandidatos import ControladorCandidatos
 from Controladores.ControladorPartidos import ControladorPartidos
-miControladorEstudiante=ControladorEstudiante()
-miControladorDepartamento=ControladorDepartamento()
-miControladorMateria=ControladorMateria()
+miControladorMesas=ControladorMesas()
 miControladorResultado=  ControladorResultado()
 """
 Declaración del atributo miControlCandidato de la clase ControladorCandidatos
