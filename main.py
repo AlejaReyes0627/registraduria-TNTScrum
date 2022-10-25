@@ -19,7 +19,12 @@ from Controladores.ControladorPartidos import ControladorPartidos
 miControladorEstudiante=ControladorEstudiante()
 miControladorDepartamento=ControladorDepartamento()
 miControladorMateria=ControladorMateria()
-miControladorInscripcion=  ControladorInscripcion()
+miControladorResultado=  ControladorResultado()
+"""
+Declaración del atributo miControlCandidato de la clase ControladorCandidatos
+"""
+miControladorCandidato = ControladorCandidatos()
+miControladorPartidos= ControladorPartidos()
 
 ###################################################################################
 @app.route("/",methods=['GET'])
