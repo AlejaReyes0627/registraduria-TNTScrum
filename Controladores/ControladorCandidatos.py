@@ -16,6 +16,7 @@ class ControladorCandidatos():
         
     """
     Método para hacer un GETALL
+    @return método para encontrar todos los candidatos
     """
     def index(self):
         return self.repositorioCandidato.findAll()
@@ -23,6 +24,7 @@ class ControladorCandidatos():
     """
     Método que hace un POST 
     @param infoCandidato: información del candidato
+    @return método para guardar el nuevo candidato
     """
     def create(self,infoCandidato):
         nuevoCandidato=Candidatos(infoCandidato)
@@ -31,6 +33,7 @@ class ControladorCandidatos():
     """
     Método que hace un GETBYID 
     @param id: id del candidato impuesto por defecto en mongo
+    @return método para encontrar un candidato por su Id
     """
     def show(self,id):
         elCandidato=Candidatos(self.repositorioCandidato.findById(id))
@@ -40,6 +43,7 @@ class ControladorCandidatos():
     Método que hace un PUT
     @param infoCandidato: información del candidato
     @param id: id del candidato impuesto por defecto en mongo
+    @return método para guardar un candidato en el mismo lugar que la encontró
     """
     def update(self,id,infoCandidato):
         CandidatoActual=Candidatos(self.repositorioCandidato.findById(id))
@@ -53,6 +57,7 @@ class ControladorCandidatos():
     """
     Método que hace un DELETE
     @param id: id del candidato impuesto por defecto en mongo
+    @return método que elimina al candidato mediante su id
     """
     def delete(self,id):
         return self.repositorioCandidato.delete(id)
@@ -61,6 +66,7 @@ class ControladorCandidatos():
     Método que relaciona candidatos y partidos
     @param id: id del candidato impuesto por defecto en mongo
     @param id_partidos: id de los partidos impuestos por defectos en mongo
+    @return método para guardar un candidato actual adicionando el partido al qe pertenece
     """
     def asignarPartido(self,id,id_partidos):
         candidatoActual=Candidatos(self.repositorioCandidato.findById(id))

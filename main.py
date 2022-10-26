@@ -78,6 +78,7 @@ def eliminarPartidos(id):
 ################################candidatos###################################################
 """
 Método que lanza una lista de los candidatos insertados
+@return retorna un json
 """
 @app.route("/candidatos",methods=['GET'])
 def getMaterias():
@@ -88,6 +89,7 @@ def getMaterias():
 """
 Método que lanza una lista de los candidatos insertados filtrados por ID
 @params id: identificador por defecto proporcionado por MongoDB
+@return retorna un json
 """
 @app.route("/candidatos/<string:id>",methods=['GET'])
 def getMateria(id):
@@ -108,6 +110,7 @@ def crearMateria():
 """
 Método que permite hacer una actualización del candidato seleccionado por id
 @params id: identificador del candidato por defecto proporcionado por MongoDB
+@return retorna un json
 """
 @app.route("/candidatos/<string:id>",methods=['PUT'])
 def modificarMateria(id):
@@ -119,6 +122,7 @@ def modificarMateria(id):
 """
 Método que elimina a un candidato mediante su id
 @params id: identificador del candidato por defecto proporcionado por MongoDB
+@return retorna un json
 """
 @app.route("/candidatos/<string:id>",methods=['DELETE'])
 def eliminarMateria(id):
@@ -129,6 +133,7 @@ def eliminarMateria(id):
 Método que relaciona a un candidato mediante su id con un partido
 @params id: identificador del candidato por defecto proporcionado por MongoDB
 @param id_partidos: id de los partidos impuestos por defectos en mongo
+@return retorna un json
 """
 @app.route("/candidatos/<string:id>/partidos/<string:id_partidos>",methods=['PUT'])
 def asignarCandidatoAPartidos(id,id_partidos):
