@@ -1,3 +1,6 @@
+"""
+Importación de módulos / dependencias para ejecutar la aplicación y evitar fallos de seguridad y formateo de datos
+"""
 from flask import Flask
 from flask import jsonify
 from flask import request
@@ -7,70 +10,126 @@ from waitress import serve
 
 app=Flask(__name__)
 cors = CORS(app)
+"""
+Importación de controladores
+"""
 from Controladores.ControladorMesas import ControladorMesas
 from Controladores.ControladorResultado import ControladorResultado
-"""
-Importación del controlador de los candidatos
-"""
 from Controladores.ControladorCandidatos import ControladorCandidatos
 from Controladores.ControladorPartidos import ControladorPartidos
+"""
+Declaración del atributo miControladores de la clases de la carpeta Controladores
+"""
 miControladorMesas=ControladorMesas()
 miControladorResultado=  ControladorResultado()
-"""
-Declaración del atributo miControlCandidato de la clase ControladorCandidatos
-"""
 miControladorCandidato = ControladorCandidatos()
 miControladorPartidos= ControladorPartidos()
 
 ###################################################################################
+"""
+Método de testeo con un GET que nos indica que la app está corriendo
+"""
 @app.route("/",methods=['GET'])
 def test():
     json = {}
     json["message"]="Server running ..."
     return jsonify(json)
 ########################mesas###########################################################
+"""
+Método que obtiene toda la lista de mesas
+@return json con la lista de objetos
+"""
 @app.route("/mesas",methods=['GET'])
 def getEstudiantes():
     json=miControladorMesas.index()
     return jsonify(json)
+
+"""
+Método que permite insertar una Mesa
+"""
 @app.route("/mesas",methods=['POST'])
 def crearEstudiante():
     data = request.get_json()
     json=miControladorMesas.create(data)
     return jsonify(json)
+
+"""
+Método que lanza una lista de las Mesas insertados filtrados por ID
+@params id: identificador por defecto proporcionado por MongoDB
+@return retorna un json
+"""
 @app.route("/mesas/<string:id>",methods=['GET'])
 def getEstudiante(id):
     json=miControladorMesas.show(id)
     return jsonify(json)
+
+"""
+Método que permite hacer una actualización de las Mesas seleccionado por id
+@params id: identificador del candidato por defecto proporcionado por MongoDB
+@return retorna un json
+"""
 @app.route("/mesas/<string:id>",methods=['PUT'])
 def modificarEstudiante(id):
     data = request.get_json()
     json=miControladorMesas.update(id,data)
     return jsonify(json)
+
+"""
+Método que elimina a una Mesa mediante su id
+@params id: identificador de la Mesa por defecto proporcionado por MongoDB
+@return retorna un json
+"""
 @app.route("/mesas/<string:id>",methods=['DELETE'])
 def eliminarEstudiante(id):
     json=miControladorMesas.delete(id)
     return jsonify(json)
 ############################partidos#######################################################
+
+"""
+Método que lanza una lista de los Partidos insertados
+@return retorna un json
+"""
 @app.route("/partidos",methods=['GET'])
 def getPartidos():
     json=miControladorPartidos.index()
     print("get partido conseguido")
     return jsonify(json)
+
+"""
+Método que lanza una lista de los Partidos insertados filtrados por ID
+@params id: identificador por defecto proporcionado por MongoDB
+@return retorna un json
+"""
 @app.route("/partidos/<string:id>",methods=['GET'])
 def getPartidosid(id):
     json=miControladorPartidos.show(id)
     return jsonify(json)
+
+"""
+Método que permite insertar un Partido
+"""
 @app.route("/partidos",methods=['POST'])
 def crearPartidos():
     data = request.get_json()
     json=miControladorPartidos.create(data)
     return jsonify(json)
+
+"""
+Método que permite hacer una actualización del candidato seleccionado por id
+@params id: identificador de los Partidos por defecto proporcionado por MongoDB
+@return retorna un json
+"""
 @app.route("/partidos/<string:id>",methods=['PUT'])
 def modificarPartidos(id):
     data = request.get_json()
     json=miControladorPartidos.update(id,data)
     return jsonify(json)
+
+"""
+Método que elimina a un Partido mediante su id
+@params id: identificador del Partido por defecto proporcionado por MongoDB
+@return retorna un json
+"""
 @app.route("/partidos/<string:id>",methods=['DELETE'])
 def eliminarPartidos(id):
     json=miControladorPartidos.delete(id)
@@ -141,10 +200,21 @@ def asignarCandidatoAPartidos(id,id_partidos):
     print(json)
     return jsonify(json)
 ##################################resultados#################################################
+
+"""
+Método que lanza una lista de los Reslutados insertados
+@return retorna un json
+"""
 @app.route("/resultados",methods=['GET'])
 def getResultados():
     json=miControladorResultado.index()
     return jsonify(json)
+
+"""
+Método que lanza una lista de los Resultados insertados filtrados por ID
+@params id: identificador por defecto proporcionado por MongoDB
+@return retorna un json
+"""
 @app.route("/resultados/<string:id>",methods=['GET'])
 def getResultado(id):
     json=miControladorResultado.show(id)
