@@ -1,3 +1,6 @@
+"""
+Importación de módulos / dependencias para ejecutar la aplicación y evitar fallos de seguridad y formateo de datos
+"""
 from flask import Flask
 from flask import jsonify
 from flask import request
@@ -7,28 +10,35 @@ from waitress import serve
 
 app=Flask(__name__)
 cors = CORS(app)
+"""
+Importación de controladores
+"""
 from Controladores.ControladorMesas import ControladorMesas
 from Controladores.ControladorResultado import ControladorResultado
-"""
-Importación del controlador de los candidatos
-"""
 from Controladores.ControladorCandidatos import ControladorCandidatos
 from Controladores.ControladorPartidos import ControladorPartidos
+"""
+Declaración del atributo miControladores de la clases de la carpeta Controladores
+"""
 miControladorMesas=ControladorMesas()
 miControladorResultado=  ControladorResultado()
-"""
-Declaración del atributo miControlCandidato de la clase ControladorCandidatos
-"""
 miControladorCandidato = ControladorCandidatos()
 miControladorPartidos= ControladorPartidos()
 
 ###################################################################################
+"""
+Método de testeo con un GET que nos indica que la app está corriendo
+"""
 @app.route("/",methods=['GET'])
 def test():
     json = {}
     json["message"]="Server running ..."
     return jsonify(json)
 ########################mesas###########################################################
+"""
+Método que obtiene toda la lista de mesas
+@return json con la lista de objetos
+"""
 @app.route("/mesas",methods=['GET'])
 def getEstudiantes():
     json=miControladorMesas.index()

@@ -1,7 +1,6 @@
 """
 Importación de las clases Respositorios y Modelos
 """
-
 from Modelos.Resultado import Resultado
 from Modelos.Mesas import Mesas
 from Modelos.Candidatos import Candidatos
