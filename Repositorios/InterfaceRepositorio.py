@@ -100,6 +100,17 @@ class InterfaceRepositorio(Generic[T]):
             x["_id"] = x["_id"].__str__()
         return x
     
+    def findByIdResultado(self):
+        laColeccion = self.baseDatos[self.coleccion]
+        data = []
+        for x in laColeccion.find().sort("numero_votos", pymongo.DESCENDING):
+            x["_id"] = x["_id"].__str__()
+            x = self.transformObjectIds(x)
+            x = self.getValuesDBRef(x)
+            data.append(x)
+        return data
+    
+    
     """
     Método que encuentra toda la lista insertada de la colección
     @return lista de objetos
@@ -128,6 +139,7 @@ class InterfaceRepositorio(Generic[T]):
             x = self.getValuesDBRef(x)
             data.append(x)
         return data
+    
     def queryAggregation(self, theQuery):
         laColeccion = self.baseDatos[self.coleccion]
         data = []

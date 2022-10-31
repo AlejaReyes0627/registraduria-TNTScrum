@@ -150,11 +150,24 @@ def asignarCandidatoAPartidos(id,id_partidos):
     json=miControladorCandidato.asignarPartido(id,id_partidos)
     print(json)
     return jsonify(json)
+
+@app.route("/candidatos/partidos/<string:id_partidos>",methods=['GET'])
+def candidatosenpartido(id_partidos):
+    json=miControladorCandidato.listarCandidatosenPartidos(id_partidos)
+    return jsonify(json)
+
+
 ##################################resultados#################################################
 @app.route("/resultados",methods=['GET'])
 def getResultados():
     json=miControladorResultado.index()
     return jsonify(json)
+
+@app.route("/resultados/orden",methods=['GET'])
+def getResultados2():
+    json=miControladorResultado.indexAll()
+    return jsonify(json)
+
 @app.route("/resultados/<string:id>",methods=['GET'])
 def getResultado(id):
     json=miControladorResultado.show(id)
@@ -163,6 +176,12 @@ def getResultado(id):
 def crearResultado(numero_mesa,cedula_candidato):
     data = request.get_json()
     json=miControladorResultado.create(data,numero_mesa,cedula_candidato)
+    return jsonify(json)
+
+@app.route("/resultados/notas_mayores",methods=['GET'])
+def getNotasMayores():
+    json=miControladorResultado.notasMasAltasPorVotos()
+    print(json)
     return jsonify(json)
 '''@app.route("/Resultados/<string:id>/estudiante/<string:id_estudiante>/materia/<string:id_materia>",methods=['PUT'])
 def modificarInscripcion(id_inscripcion,id_estudiante,id_materia):

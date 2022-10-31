@@ -73,3 +73,7 @@ class ControladorCandidatos():
         partidoActual =Partidos(self.repositorioPartidos.findById(id_partidos))
         candidatoActual.partido=partidoActual
         return self.repositorioCandidato.save(candidatoActual)
+    
+    def listarCandidatosenPartidos(self,id_partido):
+        return self.repositorioCandidato.getListadoCandidatoEnPartido(id_partido)
+    

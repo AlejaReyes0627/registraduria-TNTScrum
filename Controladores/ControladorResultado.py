@@ -23,6 +23,11 @@ class ControladorResultado():
     """
     def index(self):
         return self.repositorioResultado.findAll()
+    
+    
+    def indexAll(self):
+        return self.repositorioResultado.findByIdResultado()
+    
     '''Asignación de mesa y candidato a Resultado'''
     def create(self,infoResultado,numero_mesa,cedula_candidato):
         nuevoResultado=Resultado(infoResultado)
@@ -40,7 +45,11 @@ class ControladorResultado():
     def show(self,id):
         elResultado=Resultado(self.repositorioResultado.findById(id))
         return elResultado.__dict__
-
+    
+    "Obtener notas mas altas por curso"
+    def notasMasAltasPorVotos(self):
+        return self.repositorioResultado.getMayorNotaPorVotos()
+    
     '''def update(self,id,infoResultado,numero_mesa,cedula_candidato):
         elResultado=Resultado(self.repositorioResultado.findById(id))
         elResultado.año=infoInscripcion["año"]
@@ -53,3 +62,7 @@ class ControladorResultado():
         return self.repositorioInscripcion.save(laInscripcion)
     def delete(self, id):
         return self.repositorioInscripcion.delete(id)'''
+        
+        
+        
+            
