@@ -42,33 +42,34 @@ class RepositorioResultado(InterfaceRepositorio[Resultado]):
         pipeline = [query1,query2]
         return self.queryAggregation(pipeline)
 
-    def getVotosPorCandidatoConPartido(self):
+    def getVotosPorCandidato(self):
         query1 = {
-                 '$lookup': {
-                    'from': 'resultados', 
-                    'localField': 'id.candidatos.$id', 
-                    'foreignField': '_id', 
-                    'as': 'result'
-                }
+            '$match': {
+                'candidato.$id': ObjectId('63576789e2cd02fa1951a27e')
         }
+    }
         query2 = {
-                '$lookup': {
-                    'from': 'candidatos', 
-                    'localField': 'id.partido.$id', 
-                    'foreignField': '_id', 
-                    'as': 'result2'
-                }
-        }
-        query3 = {
-        '       $match': {
-                    'mesa.$id': ObjectId('63576728e2cd02fa1951a27d')
-                }
-        }
-        query4 = {
-                '$sort': {
-                    'numero_voto': -1
-                }
-        }
-        pipeline = [query1,query2,query3,query4]
+            '$sort': {
+                'numero_votos': -1
+            }
+    }
+        pipeline = [query1,query2]
         return self.queryAggregation(pipeline)
+
+    def Partidosporcandidato(self):
+        query1 = {
+            '$match': {
+                'partido.$id': ObjectId('63573d7d5ddb9880f8b61d4a')
+        }
+    }
+        query2 = {
+            '$sort': {
+                'cedula': 1
+        }
+    }
+        pipeline = [query1,query2]
+        return self.queryAggregation(pipeline)
+
+
+
         
