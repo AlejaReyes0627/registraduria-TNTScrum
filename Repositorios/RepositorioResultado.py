@@ -56,20 +56,7 @@ class RepositorioResultado(InterfaceRepositorio[Resultado]):
         pipeline = [query1,query2]
         return self.queryAggregation(pipeline)
 
-    def Partidosporcandidato(self):
-        query1 = {
-            '$match': {
-                'partido.$id': ObjectId('63573d7d5ddb9880f8b61d4a')
-        }
-    }
-        query2 = {
-            '$sort': {
-                'cedula': 1
-        }
-    }
-        pipeline = [query1,query2]
-        return self.queryAggregation(pipeline)
-
+    
 
 
         
