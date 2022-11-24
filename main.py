@@ -183,6 +183,12 @@ def getNotasMayores():
     json=miControladorResultado.notasMasAltasPorVotos()
     print(json)
     return jsonify(json)
+
+@app.route("/resultados/notas_mayores2",methods=['GET'])
+def getNotasMayores2():
+    json=miControladorResultado.notasMasAltasPorVotos2()
+    print(json)
+    return jsonify(json)
 '''@app.route("/Resultados/<string:id>/estudiante/<string:id_estudiante>/materia/<string:id_materia>",methods=['PUT'])
 def modificarInscripcion(id_inscripcion,id_estudiante,id_materia):
     data = request.get_json()

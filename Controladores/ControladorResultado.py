@@ -58,6 +58,9 @@ class ControladorResultado():
     def notasMasAltasPorVotos(self):
         return self.repositorioResultado.getMayorNotaPorVotos()
     
+        "Obtener notas mas altas por curso"
+    def notasMasAltasPorVotos2(self):
+        return self.repositorioResultado.getMayorNotaPorVotos2()
     '''def update(self,id,infoResultado,numero_mesa,cedula_candidato):
         elResultado=Resultado(self.repositorioResultado.findById(id))
         elResultado.año=infoInscripcion["año"]
