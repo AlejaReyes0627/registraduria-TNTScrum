@@ -51,7 +51,7 @@ class ControladorCandidatos():
         CandidatoActual.nombre = infoCandidato["nombre"]
         CandidatoActual.apellido = infoCandidato["apellido"]
         CandidatoActual.numero_resolucion = infoCandidato["numero_resolucion"]
-        CandidatoActual.partido_candidato = infoCandidato["partido_candidato"]
+        #CandidatoActual.partido_candidato = infoCandidato["partido_candidato"]
         return self.repositorioCandidato.save(CandidatoActual)
     
     """

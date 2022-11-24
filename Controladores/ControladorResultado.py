@@ -26,7 +26,15 @@ class ControladorResultado():
     
     
     def indexAll(self):
-        return self.repositorioResultado.findByIdResultado()
+        "return self.repositorioResultado.findByIdResultado()"
+        print (self.repositorioResultado.queryAggregation([
+    {
+        '$match': {
+            'mesa.$id': "ObjectId('63576728e2cd02fa1951a27d')"
+        }
+    }
+])
+)
     
     '''Asignación de mesa y candidato a Resultado'''
     def create(self,infoResultado,numero_mesa,cedula_candidato):
